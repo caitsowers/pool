@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pool — Say it. Pool reconciles it.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://use.typekit.net">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
+<!-- Neue Kabel: replace YOUR_KIT_ID with your Adobe Fonts kit ID (https://fonts.adobe.com/fonts/neue-kabel) -->
+<link rel="stylesheet" href="https://use.typekit.net/YOUR_KIT_ID.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="card">
+  <!-- LEFT: CONTENT -->
+  <div class="right">
+    <div class="left-badge">Pool</div>
+    <div>
+      <p class="kicker">For nonprofit grant finance teams</p>
+      <h1>Say it.<br>Pool reconciles it.</h1>
+      <p class="sub">Stop worrying if you got it right. Pool captures your grant hours as you work. Just like texting a friend.</p>
+    </div>
+
+    <!-- PHONE DEMO -->
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <div class="msg-header">
+            <div class="msg-header-avatar">P</div>
+            <div class="msg-header-name">Pool</div>
+          </div>
+          <div class="msg-time" id="msg-time"></div>
+          <div class="messages" id="messages">
+            <!-- injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-section">
+      <form id="wl-form" action="https://formspree.io/f/xrerqllo" method="POST">
+        <div class="form-row">
+          <input type="email" name="email" placeholder="Your work email" required autocomplete="email">
+          <button type="submit" class="form-btn">Get early access</button>
+        </div>
+      </form>
+      <div class="form-success" id="form-success">
+        <p>You're in the pool. We'll be in touch within 48 hrs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PHOTO -->
+  <div class="left">
+    <img src="images/hero.png" alt="Pool">
+  </div>
+</div>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

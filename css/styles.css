@@ -1,0 +1,465 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#B8D4E0;
+  --blue-dark:#8AAFC0;
+  --blue-deep:#3A6A80;
+  --pool:#4A9FD4;
+  --coral:#FF6B4A;
+  --coral-dark:#CC4A2A;
+  --ink:#1A2030;
+  --white:#FFFFFF;
+  --mid:#4A5A6A;
+  --faint:#8A9AAA;
+  --bubble-out:#1B6FD8;
+  --bubble-in:#E8E8EA;
+  --sand:#F5F0E8;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'neue-kabel','Neue Kabel',system-ui,sans-serif;
+  --display:'neue-kabel','Neue Kabel',system-ui,sans-serif;
+  --sf:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+html,body{margin:0}
+body{
+  background:#FFFAF6;
+  font-family:var(--sans);
+  font-weight:400;
+  min-height:100vh;
+  padding:8px;
+}
+
+/* OUTER WRAPPER — two floating cards with 8px inset */
+.card{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  width:100%;
+  max-width:1700px;
+  margin-inline:auto;
+  min-height:calc(100vh - 16px);
+  gap:8px;
+  padding:0;
+  background:transparent;
+}
+
+/* On very wide screens, give the photo a touch more room so the content
+   column doesn't feel too wide relative to the image. */
+@media(min-width:1500px){
+  .card{ grid-template-columns:1.1fr 1fr; }
+}
+
+/* LEFT — PHOTO (image fills container edge-to-edge) */
+.left{
+  position:relative;
+  overflow:hidden;
+  border-radius:24px;
+  min-height:calc(100vh - 16px);
+}
+.left img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 40%;
+  display:block;
+}
+/* Brand pill — sits at the top of the content column, inline with flow */
+.left-badge{
+  align-self:flex-start;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-radius:100px;
+  padding:0.4rem 1rem;
+  font-family:var(--serif);
+  font-size:1.1rem;
+  font-weight:900;
+  font-style:italic;
+  color:var(--ink);
+  letter-spacing:-0.02em;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  width:auto !important;
+}
+
+/* RIGHT — CONTENT */
+.right{
+  background:var(--blue);
+  padding:clamp(1.5rem,4vw,3.5rem) clamp(1.75rem,5vw,4.5rem) clamp(1.5rem,4vw,3.5rem) clamp(3rem,8vw,7rem);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:2.5rem;
+  position:relative;
+  border-radius:24px;
+  min-height:calc(100vh - 16px);
+}
+
+/* Cap inner content width so on wide screens the headline, phone, and form
+   share one comfortable reading column rather than sprawling. */
+.right > *{
+  width:100%;
+  max-width:560px;
+}
+/* Headline block gets a touch more room to breathe */
+.right > div:has(h1){
+  max-width:640px;
+}
+
+/* Order: headline → signup form → phone mockup */
+.right > div:has(h1){ order:1; }
+.form-section{ order:2; }
+.phone-wrap{ order:3; }
+
+.kicker{
+  font-size:0.82rem;
+  font-weight:500;
+  letter-spacing:0.09em;
+  text-transform:uppercase;
+  color:var(--pool);
+  margin-bottom:0.75rem;
+}
+
+h1{
+  font-family:var(--display);
+  font-size:clamp(2.8rem,5.2vw,4.5rem);
+  font-weight:700;
+  line-height:1.0;
+  letter-spacing:-0.03em;
+  color:var(--ink);
+  margin-bottom:1.5rem;
+}
+
+.sub{
+  font-size:clamp(1.05rem,1.25vw,1.2rem);
+  color:var(--mid);
+  line-height:1.55;
+  margin-bottom:0;
+  max-width:440px;
+}
+
+/* PHONE MOCKUP */
+.phone-wrap{
+  display:flex;
+  justify-content:flex-start;
+  margin:0;
+}
+.phone{
+  width:260px;
+  aspect-ratio:9 / 17.5;
+  background:var(--ink);
+  border-radius:38px;
+  padding:5px;
+  box-shadow:
+    0 40px 70px -24px rgba(0,0,0,0.32),
+    0 22px 40px -18px rgba(0,0,0,0.22),
+    0 6px 14px rgba(0,0,0,0.14);
+  position:relative;
+  flex-shrink:0;
+}
+.phone::before{
+  content:'';
+  position:absolute;
+  top:14px;left:50%;
+  transform:translateX(-50%);
+  width:72px;height:10px;
+  background:#2A2A2A;
+  border-radius:100px;
+  z-index:2;
+}
+.screen{
+  background:#F2F2F7;
+  border-radius:33px;
+  overflow:hidden;
+  padding:40px 0 12px;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  font-family:var(--sf);
+}
+
+/* MESSAGES HEADER — iMessage style */
+.msg-header{
+  text-align:center;
+  padding:0 12px 8px;
+  border-bottom:0.5px solid rgba(0,0,0,0.08);
+  margin-bottom:10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.msg-header-avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--pool);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);
+  font-weight:900;
+  font-style:italic;
+  font-size:1.25rem;
+  letter-spacing:-0.02em;
+}
+.msg-header-name{
+  font-size:1rem;
+  font-weight:500;
+  color:#1A1A1A;
+  font-family:var(--sf);
+  letter-spacing:-0.01em;
+}
+
+/* MESSAGES */
+.messages{
+  padding:0 10px;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  flex:1;
+  overflow:hidden;
+}
+/* voice + transcript are one message — tighten gap between them */
+.msg-out + .msg-transcript{ margin-top:-16px; }
+
+/* outgoing — user sends voice memo */
+.msg-out{
+  align-self:flex-end;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  max-width:85%;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity 0.3s ease, transform 0.3s ease;
+}
+.msg-out.show{opacity:1;transform:translateY(0)}
+
+.voice-bubble{
+  background:var(--bubble-out);
+  border-radius:16px 16px 3px 16px;
+  padding:7px 10px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.voice-mic-sm{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(255,255,255,0.22);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.voice-mic-sm svg{stroke:#fff;stroke-width:2.5;fill:none;stroke-linecap:round}
+.voice-wf{display:flex;align-items:center;gap:1.5px;height:12px}
+.vb{width:2px;border-radius:2px;background:#fff}
+.vb:nth-child(1){height:3px}.vb:nth-child(2){height:7px}.vb:nth-child(3){height:10px}
+.vb:nth-child(4){height:5px}.vb:nth-child(5){height:9px}.vb:nth-child(6){height:3px}
+.vb:nth-child(7){height:7px}.vb:nth-child(8){height:11px}.vb:nth-child(9){height:6px}
+.vb:nth-child(10){height:4px}
+.voice-dur{
+  font-size:0.88rem;
+  color:#fff;
+  font-family:var(--sf);
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:-0.01em;
+  white-space:nowrap;
+}
+
+/* transcript bubble */
+.msg-transcript{
+  align-self:flex-end;
+  background:var(--bubble-out);
+  border-radius:18px 18px 4px 18px;
+  padding:8px 12px;
+  max-width:85%;
+  font-size:0.88rem;
+  color:#fff;
+  font-family:var(--sf);
+  line-height:1.35;
+  letter-spacing:-0.01em;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity 0.3s ease,transform 0.3s ease;
+}
+.msg-transcript.show{opacity:1;transform:translateY(0)}
+
+/* typing indicator */
+.typing{
+  align-self:flex-start;
+  background:var(--bubble-in);
+  border-radius:14px 14px 14px 3px;
+  padding:8px 12px;
+  display:flex;gap:3px;align-items:center;
+  opacity:0;transition:opacity 0.2s ease;
+}
+.typing.show{opacity:1}
+.typing span{
+  width:5px;height:5px;border-radius:50%;
+  background:#8A8A8E;
+  animation:dot 1.2s ease-in-out infinite;
+}
+.typing span:nth-child(2){animation-delay:0.2s}
+.typing span:nth-child(3){animation-delay:0.4s}
+@keyframes dot{0%,80%,100%{transform:scale(0.7);opacity:0.5}40%{transform:scale(1);opacity:1}}
+
+/* pool reply */
+.msg-in{
+  align-self:flex-start;
+  max-width:90%;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity 0.3s ease,transform 0.3s ease;
+}
+.msg-in.show{opacity:1;transform:translateY(0)}
+.in-bubble{
+  background:var(--bubble-in);
+  border-radius:18px 18px 18px 4px;
+  padding:8px 12px;
+  font-size:0.88rem;
+  color:#1A1A1A;
+  font-family:var(--sf);
+  line-height:1.35;
+  letter-spacing:-0.01em;
+}
+
+/* timestamp — iMessage style, above conversation */
+.msg-time{
+  text-align:center;
+  font-size:0.7rem;
+  color:#8A8A8E;
+  font-family:var(--sf);
+  padding:4px 12px 18px;
+  font-weight:500;
+  letter-spacing:-0.01em;
+}
+.msg-time-day{font-weight:600;color:#3A3A3E}
+
+/* FORM */
+.form-section{max-width:420px;width:100%}
+.form-label{
+  font-size:0.7rem;
+  font-weight:500;
+  color:var(--mid);
+  margin-bottom:0.5rem;
+  letter-spacing:0.02em;
+}
+.form-row{
+  display:flex;
+  align-items:center;
+  gap:0;
+  height:72px;
+  background:var(--white);
+  border-radius:100px;
+  padding:8px 8px 8px 24px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+.form-row input{
+  flex:1;border:none;background:transparent;outline:none;
+  font-family:var(--sans);font-size:1rem;font-weight:400;
+  color:var(--ink);min-width:0;
+  height:100%;
+}
+.form-row input::placeholder{color:var(--faint)}
+.form-btn{
+  background:var(--ink);color:var(--white);border:none;
+  padding:0 1.5rem;height:100%;border-radius:100px;
+  font-family:var(--sans);font-size:0.9rem;font-weight:500;
+  cursor:pointer;white-space:nowrap;
+  box-shadow:0 2px 0 #000;
+  transition:background 0.15s,transform 0.1s,box-shadow 0.1s;
+}
+.form-btn:hover{background:#2A3040}
+.form-btn:active{transform:translateY(1px);box-shadow:none}
+.form-success{
+  display:none;
+  background:rgba(255,255,255,0.7);
+  border-radius:12px;padding:0.85rem 1rem;
+  text-align:center;
+  font-size:0.82rem;font-weight:500;color:var(--blue-deep);
+}
+
+/* RESPONSIVE */
+@media(max-width:780px){
+  body{padding:6px}
+  .card{
+    grid-template-columns:1fr;
+    min-height:auto;
+    gap:6px;
+  }
+  .left{
+    height:clamp(240px,58vw,360px);
+    border-radius:20px;
+  }
+  .right{
+    padding:1.75rem 1.5rem 1.5rem;
+    min-height:auto;
+    gap:2rem;
+    border-radius:20px;
+  }
+  .right > *,
+  .right > div:has(h1){ max-width:100%; }
+
+  /* Reorder on mobile: headline → demo → CTA.
+     Show the product before asking for the email. */
+  .right > div:has(h1){ order:1; }
+  .phone-wrap{ order:2; }
+  .form-section{ order:3; }
+
+  .phone-wrap{ justify-content:center; margin-top:0.25rem; }
+
+  h1{
+    font-size:clamp(2.2rem,9vw,3rem);
+    margin-bottom:1rem;
+    line-height:1.02;
+  }
+  .sub{
+    font-size:1.02rem;
+    max-width:100%;
+  }
+  .kicker{ font-size:0.72rem; margin-bottom:0.6rem; }
+
+  .phone{ width:clamp(232px,62vw,272px); }
+
+  .form-section{ max-width:100%; }
+  .form-row{
+    height:60px;
+    padding:6px 6px 6px 20px;
+  }
+  .form-row input{ font-size:1rem; }
+  .form-btn{
+    padding:0 1.1rem;
+    font-size:0.88rem;
+    min-height:44px;
+  }
+}
+
+/* Narrow mobile: stack the form — full-width input above a full-width CTA.
+   The pill layout can't fit "Your work email" + "Get early access" at 375dp
+   without one eating the other. */
+@media(max-width:480px){
+  h1{ font-size:clamp(2rem,8.5vw,2.4rem); }
+  .right{ padding:1.5rem 1.25rem 1.25rem; gap:1.75rem; }
+  .left{ height:clamp(220px,62vw,320px); }
+
+  .form-row{
+    flex-direction:column;
+    align-items:stretch;
+    height:auto;
+    gap:8px;
+    padding:8px;
+    border-radius:20px;
+  }
+  .form-row input{
+    height:52px;
+    padding:0 1rem;
+    font-size:1rem;
+    background:#F7F8FA;
+    border-radius:14px;
+    width:100%;
+  }
+  .form-btn{
+    width:100%;
+    height:52px;
+    border-radius:14px;
+    font-size:0.95rem;
+    padding:0 1rem;
+  }
+}
