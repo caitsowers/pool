@@ -26,7 +26,15 @@ async function runDemo(){
 
   await sleep(800);
 
-  // 1. Voice bubble (outgoing)
+  // 1. Pool nudges first (incoming)
+  const nudge = el('div','msg-in',`
+    <div class="in-bubble">Hey Maria — end-of-month check-in. Any hours on CDBG-CV Housing this week?</div>
+  `);
+  msgs.appendChild(nudge);
+  await show(nudge, 100);
+  await sleep(1400);
+
+  // 2. Voice bubble reply (outgoing)
   const voiceOut = el('div','msg-out',`
     <div class="voice-bubble">
       <div class="voice-mic-sm">
@@ -42,16 +50,16 @@ async function runDemo(){
         <div class="vb"></div><div class="vb"></div><div class="vb"></div>
         <div class="vb"></div>
       </div>
-      <span class="voice-dur">0:08</span>
+      <span class="voice-dur">0:09</span>
     </div>
   `);
   msgs.appendChild(voiceOut);
   await show(voiceOut, 100);
   await sleep(900);
 
-  // 2. Transcript (what was said)
+  // 3. Transcript (what was said)
   const transcript = el('div','msg-transcript',
-    '"Hey Pool, log 3 hours on my CDBG grant for Tuesday"');
+    '"Yeah, 6 hours Tuesday and Wednesday on CDBG, and 2 on HOME Friday."');
   msgs.appendChild(transcript);
   await show(transcript, 100);
   await sleep(1000);
@@ -69,7 +77,7 @@ async function runDemo(){
   typing.remove();
 
   const reply = el('div','msg-in',`
-    <div class="in-bubble">Done — logged 3 hrs to CDBG-CV Housing for Tuesday. Coded to PP03 ✓</div>
+    <div class="in-bubble">Got it — logged 6 hrs CDBG-CV Housing (PP03) + 2 hrs HOME Admin. Sent to Jordan for approval ✓</div>
   `);
   msgs.appendChild(reply);
   await show(reply, 100);
